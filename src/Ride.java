@@ -1,6 +1,7 @@
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class Ride implements RideInterface {
     private String rideName;  
     private boolean isOpen;   
@@ -22,19 +23,32 @@ public class Ride implements RideInterface {
 
     @Override
     public void addVisitorToQueue(Visitor visitor) {
-        queue.add(visitor);
+        if (visitor != null) {
+            queue.add(visitor);  
+            System.out.println("Traveller " + visitor.getName() + " successfully joined " + rideName + " of the queue.");
+        } else {
+            System.out.println("Visitor information is invalid and cannot be added to the queue.");
+        }
     }
 
     @Override
     public void removeVisitorFromQueue(Visitor visitor) {
-        queue.remove(visitor);
+        if (queue.remove(visitor)) { 
+            System.out.println("Traveller " + visitor.getName() + " have passed away from " + rideName + " removed from the queue.");
+        } else {
+            System.out.println("Traveller " + visitor.getName() + " not in the queue and cannot be removed.");
+        }
     }
 
     @Override
     public void printQueue() {
-        System.out.println("Visitor queues：");
-        for (Visitor visitor : queue) {
-            System.out.println(visitor.getName() + " (" + visitor.getTicketNumber() + ")");
+        if (queue.isEmpty()) {
+            System.out.println("There are currently no tourists in " + rideName + " in the queue");
+        } else {
+            System.out.println(rideName + " Queues for amusement rides：");
+            for (Visitor visitor : queue) {
+                System.out.println(visitor.getName() + " (" + visitor.getTicketNumber() + ")");
+            }
         }
     }
 
@@ -51,7 +65,10 @@ public class Ride implements RideInterface {
 
     @Override
     public void addVisitorToHistory(Visitor visitor) {
-        rideHistory.add(visitor);
+        if (visitor != null) {
+            rideHistory.add(visitor);
+            System.out.println(visitor.getName() + " added to " + rideName + " in the history of the.");
+        }
     }
 
     @Override
@@ -66,11 +83,16 @@ public class Ride implements RideInterface {
 
     @Override
     public void printRideHistory() {
-        System.out.println("History of Amusement Rides：");
-        for (Visitor visitor : rideHistory) {
-            System.out.println(visitor.getName() + " (" + visitor.getTicketNumber() + ")");
+        if (rideHistory.isEmpty()) {
+            System.out.println("Amusement facilities " + rideName + " no history is available.");
+        } else {
+            System.out.println("Amusement facilities " + rideName + " historical records：");
+            for (Visitor visitor : rideHistory) {
+                System.out.println(visitor.getName() + " (" + visitor.getTicketNumber() + ")");
+            }
         }
     }
+
 
     public String getRideName() {
         return rideName;
