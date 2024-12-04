@@ -27,6 +27,9 @@ public class AssignmentTwo {
 
         ride.printQueue();
 
+
+        ride.runOneCycle();
+        
         ride.removeVisitorFromQueue(visitor3);
         System.out.println("Removed visitor " + visitor3.getName() + " from the queue.");
 
@@ -63,5 +66,6 @@ public class AssignmentTwo {
         ride.addVisitorToHistory(visitor7);
         System.out.println("Visitor " + visitor7.getName() + " in ride history: " + ride.checkVisitorFromHistory(visitor7));
         ride.printRideHistory();
+        System.out.println("Number of visitors in ride history: " + ride.numberOfVisitors());
     }
 }
