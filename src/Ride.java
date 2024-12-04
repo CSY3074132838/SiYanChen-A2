@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Collections;
 
 public class Ride implements RideInterface {
     private String rideName;  
@@ -93,6 +93,10 @@ public class Ride implements RideInterface {
         }
     }
 
+    // 使用 VisitorComparator 对乘坐历史记录进行排序
+    public void sortRideHistory() {
+        Collections.sort(rideHistory, new VisitorComparator());
+    }
 
     public String getRideName() {
         return rideName;
