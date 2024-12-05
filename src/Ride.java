@@ -1,8 +1,12 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class Ride implements RideInterface {
     private String rideName;  
@@ -126,6 +130,27 @@ public class Ride implements RideInterface {
         return rideHistory.size();
     }
 
+    public void exportRideHistory(String filename) {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(filename));  
+            for (Visitor visitor : rideHistory) {
+                writer.write(visitor.getName() + " (" + visitor.getTicketNumber() + ")");
+                writer.newLine(); 
+            }
+            System.out.println("The amusement ride history has been successfully exported to file: " + filename);
+        } catch (IOException e) {
+            System.err.println("Error while writing file: " + e.getMessage());
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.close();  
+                }
+            } catch (IOException e) {
+                System.err.println("An error occurred while closing the file writer: " + e.getMessage());
+            }
+        }
+    }
 
     public String getRideName() {
         return rideName;
@@ -167,5 +192,6 @@ public class Ride implements RideInterface {
         this.numOfCycles = numOfCycles;
     }
 }
+   
 
 

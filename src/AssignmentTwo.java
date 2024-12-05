@@ -1,3 +1,5 @@
+import java.io.File;
+
 public class AssignmentTwo {
     public static void partFive() {
         System.out.println("Part Five: Ride operation and visitor management");
@@ -40,6 +42,30 @@ public class AssignmentTwo {
         ride.printRideHistory();
     }
 
+     public static void partSix() {
+        System.out.println("Part Six: Export ride history");
+
+        Employee operator = new Employee("Max Harrison", 30, "32 George Street, The Rocks, Sydney, NSW 2000", "E123", "Driver");
+
+        Ride rollerCoaster = new Ride("Roller Coaster", true, operator, 5);
+
+        Visitor v1 = new Visitor("Charlotte Johnson", 25, "57 Pitt Street, Sydney, NSW 2000", "V456", "Annual Pass for Amusement Parks");
+        Visitor v2 = new Visitor("Jackson Davis", 22, "33 Macquarie Street, Circular Quay, Sydney, NSW 2000", "V202", "general admission ticket");
+        Visitor v3 = new Visitor("Ava Brown", 28, "12 Crown Street, Surry Hills, Sydney, NSW 2010", "V303", "VIP ticket");
+        Visitor v4 = new Visitor("Ethan Thompson", 40, "42 Acacia Street, Bondi Beach, New South Wales, 2026", "V404", "One-day Pass");
+        Visitor v5 = new Visitor("Liam Murphy", 18, "105 Ocean Boulevard, Gold Coast, Queensland, 4217", "V505", "VIP");
+
+        rollerCoaster.addVisitorToHistory(v1);
+        rollerCoaster.addVisitorToHistory(v2);
+        rollerCoaster.addVisitorToHistory(v3);
+        rollerCoaster.addVisitorToHistory(v4);
+        rollerCoaster.addVisitorToHistory(v5);
+
+        System.out.println("Before exporting ride history:");
+        rollerCoaster.printRideHistory();
+
+        
+    }
     public static void main(String[] args) {
         System.out.println("Part IV B: Sort visitors by name and ticket number");
 
@@ -115,7 +141,7 @@ public class AssignmentTwo {
         rideForOperation.runOneCycle();
         rideForOperation.printQueue();
 
-        System.out.println("\nPart 7: Complete Employee-Visitor Interaction Presentation");
+        System.out.println("\nPart VII: Complete Employee-Visitor Interaction Presentation");
 
         Employee employee3 = new Employee("Ethan Thompson", 40, "42 Acacia Street, Bondi Beach, New South Wales, 2026", "E404", "supervisor");
         Visitor visitor7 = new Visitor("Liam Murphy", 18, "105 Ocean Boulevard, Gold Coast, Queensland, 4217", "V505", "VIP");
