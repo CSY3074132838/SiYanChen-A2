@@ -1,6 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -149,6 +147,30 @@ public class Ride implements RideInterface {
             } catch (IOException e) {
                 System.err.println("An error occurred while closing the file writer: " + e.getMessage());
             }
+        }
+    }
+
+    public void importRideHistory(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Parse the format: "Name (TicketNumber)"
+                if (line.contains(" (") && line.endsWith(")")) {
+                    int startIndex = line.indexOf(" (");
+                    String name = line.substring(0, startIndex);
+                    String ticketNumber = line.substring(startIndex + 2, line.length() - 1);
+
+                    Visitor visitor = new Visitor(name, 0, "Unknown", ticketNumber, "Unknown");
+                    rideHistory.add(visitor);
+                } else {
+                    System.err.println("Invalid data format in line: " + line);
+                }
+            }
+            System.out.println("Ride history imported successfully from: " + filename);
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + filename);
+        } catch (IOException e) {
+            System.err.println("Error while importing ride history: " + e.getMessage());
         }
     }
 
